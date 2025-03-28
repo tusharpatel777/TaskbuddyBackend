@@ -10,7 +10,12 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+// ✅ Allow requests from your frontend
+app.use(cors({
+  origin: "https://taskbuddyfrontend.vercel.app", // Allow only your frontend
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true, // Allow cookies if needed
+}));
 
 
 app.use("/api/auth", authRoutes);
